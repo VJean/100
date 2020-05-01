@@ -63,5 +63,5 @@ if __name__ == '__main__':
     ax1.set_title("100 push-ups and squats every 2 days: timing progression")
     
     fig.tight_layout()
-    fig.savefig('fig.png')
+    fig.savefig('figure.png')
 
