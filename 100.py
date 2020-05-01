@@ -36,18 +36,21 @@ def load_data():
 if __name__ == '__main__':
     d, pt, st = load_data()
     fig, ax1 = plt.subplots()
+   # fig.suptitle("100 push-ups and squats every 2 days: timing progression")
 
-    locator = mdates.DayLocator()
-    #fig.autofmt_xdate()  # rotate and align the tick labels so they look better
+    ax1.set_ylabel("Time to 100 reps")
     ax1.xaxis.set_major_formatter(mdates.DateFormatter(fmt=DATE_FMT))
+    
+    locator = mdates.DayLocator()
+    fig.autofmt_xdate()  # rotate and align the tick labels so they look better
+    ax1.set_xlabel("Date")
     ax1.xaxis.set_major_locator(locator)
     ax1.yaxis.set_major_formatter(FuncFormatter(seconds_formatter))
 
-    ax1.set_xlabel("Date")
-    ax1.set_ylabel("Time")
-    
-    p1, = ax1.plot(d, pt, 'o-')
-    p2, = ax1.plot(d, st, 'o-')
+    ax1.plot(d, pt, 'o-', label='push-ups')
+    ax1.plot(d, st, 'o-', label='squats')
+    ax1.legend()
+    ax1.set_title("100 push-ups and squats every 2 days: timing progression")
     
     fig.tight_layout()
     fig.savefig('fig.png')
