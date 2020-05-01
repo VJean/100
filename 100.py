@@ -10,11 +10,20 @@ DATE_FMT = '%d/%m/%Y'
 
 
 def to_seconds(time_str):
+    """
+    Return the number of seconds corresponding to
+    a duration string formatted as %M'%S
+    """
     m, s = time_str.split("'")
     return int(m) * 60 + int(s)
 
 
 def seconds_formatter(x, pos):
+    """
+    Formatter used for the plot's xaxis, takes x as
+    a number of seconds (float), and returns a string.
+    For example, x:90.0 returns "01m30s"
+    """
     m = x // 60
     s = x % 60
     return "{:02.0f}m{:02.0f}s".format(m, s)
