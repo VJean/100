@@ -1,4 +1,5 @@
 #!/bin/env python3
+from os import path
 import csv
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
@@ -19,12 +20,12 @@ def seconds_formatter(x, pos):
     return "{:02.0f}m{:02.0f}s".format(m, s)
 
 
-def load_data():
-    # TODO properly get the file location
+def load_data(file_path):
     dates =  []
     pushups_times = []
     squats_times = []
-    with open('./data.csv') as f:
+
+    with open(file_path) as f:
         reader = csv.DictReader(f)
         for row in reader:
             dates.append(dt.strptime(row['date'], DATE_FMT).date())
@@ -34,7 +35,9 @@ def load_data():
 
 
 if __name__ == '__main__':
-    d, pt, st = load_data()
+    dirname = path.dirname(__file__)
+    data_path = path.join(dirname, 'data.csv')
+    d, pt, st = load_data(data_path)
     fig, ax1 = plt.subplots()
 
     ax1.set_ylabel("Time to 100 reps")
